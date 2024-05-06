@@ -1,20 +1,28 @@
 <script>
-  import HeaderPage from "./components/HeaderPage.vue";
+import AppHeader from "./components/AppHeader.vue";
+import AppMain from "./components/AppMain.vue"; 
+import AppFooter from "./components/AppFooter.vue";
 
-  export default {
-    components: {
-      HeaderPage,
-    },
-    data () {
-      return {};
-    },
-  };
+export default {
+  components: {
+    AppHeader,
+    AppMain,
+    AppFooter,
+  },
+  data(){
+    return {
+
+    }
+  }
+}
 </script>
 
 <template>
-  <HeaderPage></HeaderPage>
+    <AppHeader />
+    <AppMain />
+    <AppFooter />
 </template>
 
-<style>
+<style lang="scss">
 
 </style>
