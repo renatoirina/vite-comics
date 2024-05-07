@@ -17,9 +17,6 @@ export default {
                 <li><a href=""><img src="../assets/img/footer-periscope.png" alt=""></a></li>
             </ul>
         </div>
-        <div class="bg-logo">
-            <img src="../assets/img/dc-logo-bg.png" alt="">
-        </div>
     </div>
 </template>
 
@@ -57,11 +54,6 @@ export default {
     li {
         width: 20%;
         padding-left: 20px
-    }
-
-    bg-logo {
-        height: 200px;
-        width: 200px;
     }
 };
 

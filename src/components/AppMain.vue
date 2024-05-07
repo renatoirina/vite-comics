@@ -1,6 +1,5 @@
 <script>
 import AppCard from './AppCard.vue';
-import ProductCard from './AppCard.vue';
 
 export default {
     data() {
@@ -67,7 +66,7 @@ export default {
         };
     },
     methods: {
-        getImagePath (imageName) {
+        getImagePath(imageName) {
             return new URL(`../assets/img/${imageName}`, import.meta.url).href;
         },
     },
@@ -81,7 +80,7 @@ export default {
     <section>
         <div class="upper-main">
             <div class="row">
-                <div class="col" v-for="element in products">
+                <div class="col" v-for="element in products" :key="element.thumb">
                     <AppCard :thumb="element.thumb" :series="element.series"/>
                 </div>
             </div>
@@ -100,14 +99,14 @@ export default {
             <div>
                 <h3>DC COMICS</h3>
                 <ul>
-                    <li v-for="item in comics">
+                    <li v-for="item in comics" :key="item.title">
                         <a href="">{{ item.title }}</a>
                     </li>
                 </ul>
                 
                 <h3>SHOP</h3>
                 <ul>
-                    <li v-for="item in shop">
+                    <li v-for="item in shop" :key="item.title">
                         <a href="">{{ item.title }}</a>
                     </li>
                 </ul>
@@ -115,18 +114,23 @@ export default {
             
             <div>
                 <h3>DC</h3>
-                <li v-for="item in dc">
-                    <a href="">{{ item.title }}</a>
-                </li>
+                <ul>
+                    <li v-for="item in dc" :key="item.title">
+                        <a href="">{{ item.title }}</a>
+                    </li>
+                </ul>
             </div>
 
             <div>
                 <h3>SITES</h3>
                 <ul>
-                    <li v-for="item in sites">
+                    <li v-for="item in sites" :key="item.title">
                         <a href="">{{ item.title }}</a>
                     </li>
                 </ul>
+            </div>
+            <div class="bg-logo">
+                <img src="../assets/img/dc-logo-bg.png" alt="">
             </div>
         </div>
 
@@ -186,6 +190,7 @@ section {
         
     .lower-main {
         @include flex(row,start,start);
+        position: relative;
         font-family: sans-serif;
         font-size: 1.1rem;
         padding-left: 200px;
@@ -198,20 +203,30 @@ section {
         
         h3 {
             margin: 20px 0;
-        };
+        }
         
         li {
             margin: 7px 0;
             font-size: 0.8rem; 
-        };
+        }
         
         a {
             color: $grey;
+
             &:hover {
-                text-decoration: underline;
                 color: $white;
             }
-        };
+        }
+
+        .bg-logo {
+            position: absolute;
+            right: 0;
+
+            img {
+                height: 90%;
+                width: 90%;
+            }
+        }
     }
 }
 </style>
