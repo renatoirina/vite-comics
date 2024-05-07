@@ -16,11 +16,11 @@ export default {
             ],
 
             buyitems: [
-                { title: "DIGITAL COMICS", image: "../assets/img/buy-comics-digital-comics.png" },
-                { title: "MERCHANDISE", image: "../assets/img/buy-comics-merchandise.png" },
-                { title: "SHOP LOCATOR", image: "../assets/img/buy-comics-shop-locator.png" },
-                { title: "SUBSCRIPTION", image: "../assets/img/buy-comics-subscription.png" },
-                { title: "DC POWER VISA", image: "../assets/img/buy-dc-power-visa.png" },
+                { title: "DIGITAL COMICS", image: "buy-comics-digital-comics.png" },
+                { title: "MERCHANDISE", image: "buy-comics-merchandise.png" },
+                { title: "SHOP LOCATOR", image: "buy-comics-shop-locator.png" },
+                { title: "SUBSCRIPTION", image: "buy-comics-subscriptions.png" },
+                { title: "DC POWER VISA", image: "buy-dc-power-visa.svg" },
             ],
             
             shop: [
@@ -66,9 +66,13 @@ export default {
             ]
         };
     },
-    
+    methods: {
+        getImagePath (imageName) {
+            return new URL(`../assets/img/${imageName}`, import.meta.url).href;
+        },
+    },
     components: {
-        AppCard
+        AppCard,
     },
 }
 </script>
@@ -82,14 +86,16 @@ export default {
                 </div>
             </div>
         </div>
+        
         <div class="icon-main">
             <div class="buyitem" v-for="item in buyitems" :key="item.title">
-                <a :href="item.link">
-                    <img :src="item.image" alt="">
-                </a>
-                <a :href="item.link" class="buyitem-title">{{ item.title }}</a>
+                <div class="buyitem-content">
+                    <img :src="getImagePath(item.image)" alt="">
+                    <a :href="item.link" class="buyitem-title">{{ item.title }}</a>
+                </div>
             </div>
         </div>
+    
         <div class="lower-main">
             <div>
                 <h3>DC COMICS</h3>
@@ -144,9 +150,9 @@ section {
         justify-content: space-between;
         flex-wrap: wrap;
         .col {
-                width: 15%;
-                margin-bottom: 2em;
-            }
+            width: 15%;
+            margin-bottom: 2em;
+        }
     }
 
     .icon-main {
@@ -159,12 +165,22 @@ section {
             display: flex;
             flex-direction: column;
             align-items: center;
-        }
+            margin-right: 20px;
 
-        .buyitem-title {
-            color: white;
-            margin-top: 5px;
-            text-align: center;
+            .buyitem-content {
+                @include flex(row, start, center);
+                margin-bottom: 10px;
+            }
+
+            .buyitem-image {
+                width: 50px;
+                height: auto;
+            }
+
+            .buyitem-title {
+                color: white;
+                text-align: center;
+            }
         }
     }
         
@@ -196,13 +212,6 @@ section {
                 color: $white;
             }
         };
-
-        img {
-            width: 500px;
-            position: absolute;
-            right: 300px;
-            top: 1090px;
-        }
     }
 }
 </style>
