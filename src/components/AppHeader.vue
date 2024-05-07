@@ -3,58 +3,49 @@ export default {
     data() {
         return {
             menu: [
-                {
-                title: "CHARACTERS",
-                },
-                {
-                title: "COMICS",
-                },
-                {
-                title: "MOVIES",
-                },
-                {
-                title: "TV",
-                },
-                {
-                title: "GAMES",
-                },
-                {
-                title: "COLLECTIBLES",
-                },
-                {
-                title: "VIDEOS",
-                },
-                {
-                title: "FANS",
-                },
-                {
-                title: "NEWS",
-                },
-                {
-                title: "SHOP",
-                },
+                { title: "CHARACTERS", hovered: false },
+                { title: "COMICS", hovered: false },
+                { title: "MOVIES", hovered: false },
+                { title: "TV", hovered: false },
+                { title: "GAMES", hovered: false },
+                { title: "COLLECTIBLES", hovered: false },
+                { title: "VIDEOS", hovered: false },
+                { title: "FANS", hovered: false },
+                { title: "NEWS", hovered: false },
+                { title: "SHOP", hovered: false },
             ],
         };
     },
+    methods: {
+        changeColor(item) {
+            item.hovered = true;
+        },
+        resetColor() {
+            this.menu.forEach(item => item.hovered = false);
+        }
+    }
 }
 </script>
 
 <template>
-<header>
-    <div class="header-img">
-        <img src="../assets/img/dc-logo.png" alt="Logo DC">
+    <header>
+        <div class="header-img">
+            <img src="../assets/img/dc-logo.png" alt="Logo DC">
+        </div>
+        <ul class="header-nav">
+            <li v-for="item in menu" :key="item.title">
+                <a href="#" 
+                   @mouseover="changeColor(item)" 
+                   @mouseout="resetColor"
+                   :style="{ color: item.hovered ? $blue : 'black' }">
+                    {{ item.title }}
+                </a>
+            </li>
+        </ul>
+    </header>
+    <div class="jumbotron-container">
+        <img src="../assets/img/jumbotron.jpg" alt="Jumbotron Image" class="jumbotron-image">
     </div>
-    <ul class="header-nav">
-        <li v-for="item in menu">
-            <a href="">{{ item.title }}</a>
-        </li>
-    </ul>
-</header>
-<div class="jumbotron-container">
-    <img src="../assets/img/jumbotron.jpg" alt="Jumbotron Image" class="jumbotron-image">
-</div>
-
-
 </template>
 
 <style lang="scss" scoped>
@@ -65,6 +56,11 @@ header {
     @include flex(row, space-between, center);
     padding: 10px;
     height: 152px;
+
+    a {
+        text-decoration: none;
+    }
+
 
     .header-img {
         @include flex(row, center, center); 
@@ -92,9 +88,6 @@ header {
             &:hover {
                 border-bottom: 5px solid $blue;
                 color: $blue;
-                a:hover {
-                    color: $blue;
-                }
             }
         }
     }
@@ -112,8 +105,4 @@ header {
         position: relative;
     }
 }
-
-
-
-
 </style>
